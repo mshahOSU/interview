@@ -17,8 +17,9 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag interview:$(date +%s)
     
-    - name: Setup JFrog CLI
-      uses: jfrog/setup-jfrog-cli@v3.1.0
+    -
+      name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
     
     -
       name: Login to JFrog
@@ -27,3 +28,10 @@ jobs:
         registry: interviewtest.jfrog.io
         username: ${{ secrets.JFROG_USER }}
         password: ${{ secrets.JFROG_PASS }}
+    -
+      name: Build and push
+      id: docker_build
+      uses: docker/build-push-action@v2
+      with:
+        push: true
+        tags: interviewtest.jfrog.io/interview:latest
