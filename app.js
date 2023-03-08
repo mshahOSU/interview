@@ -1,11 +1,12 @@
 var express = require('express');
 var app = express();
+require('dotenv').config();
 const PG_CONFIG = {
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
   password: process.env.DB_PASS,
-  port: 5432,
+  port: parseInt(process.env.DB_PORT || "5432")
 }
 
 app.get('/', function(req, res){
