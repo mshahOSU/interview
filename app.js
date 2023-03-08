@@ -9,6 +9,8 @@ const PG_CONFIG = {
   port: parseInt(process.env.DB_PORT || "5432")
 }
 
+// sample
+
 app.get('/', function(req, res){
    res.send("Hello world!");
 });
